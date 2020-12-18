@@ -20,3 +20,5 @@ CATEGORICAL_VARS = ['sex', 'cabin', 'embarked', 'title']
 NUMERICAL_VARS = ['age', 'fare']
 
 CABIN = 'cabin'
+
+NUMERICAL_NA_NOT_ALLOWED = ['pclass', 'sibsp', 'parch']
