@@ -4,6 +4,9 @@ from titanic_classifier_model import __version__ as model_version
 
 from api import __version__ as api_version
 from api.config import get_logger
+from api.validation import validate_inputs
+
+import json
 
 
 _logger = get_logger(logger_name=__name__)
@@ -31,13 +34,17 @@ def predict():
         json_data = request.get_json()
         _logger.info(f'Inputs: {json_data}')
 
-        result = make_prediction(input_data=json_data)
+        input_data, errors = validate_inputs(input_data=json_data)
+        _logger.info(f'\n!!!\nValidated inputs: {input_data}')
+
+        result = make_prediction(input_data=input_data)
         _logger.info(f'Outputs: {result}')
 
-        predictions = result.get('predictions')[0]
+        predictions = result.get('predictions').tolist()
         version = result.get('version')
 
-        return jsonify({'predictions': int(predictions),
+        return jsonify({'predictions': predictions,
+                        'errors': errors,
                         'version': version})
 
 
