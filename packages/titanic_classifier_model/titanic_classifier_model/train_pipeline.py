@@ -7,6 +7,12 @@ import joblib
 from titanic_classifier_model import pipeline
 from titanic_classifier_model.config import config
 from titanic_classifier_model.processing.data_management import load_data, save_pipeline
+from titanic_classifier_model import __version__ as _version
+
+import logging
+
+
+_logger = logging.getLogger("titanic_classifier_model")
 
 
 def run_training():
@@ -24,6 +30,8 @@ def run_training():
 
     # fit pipeline
     pipeline.titanic_pipe.fit(X_train, y_train)
+
+    _logger.info(f"saving model version: {_version}")
 
     # save pipeline
     save_pipeline(pipeline_to_persist=pipeline.titanic_pipe)
