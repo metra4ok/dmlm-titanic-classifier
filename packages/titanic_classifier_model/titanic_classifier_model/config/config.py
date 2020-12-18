@@ -11,3 +11,9 @@ DATASET_DIR = PACKAGE_ROOT / "datasets"
 TESTING_DATA_FILE = "test.csv"
 TRAINING_DATA_FILE = "train.csv"
 TARGET = "survived"
+
+CATEGORICAL_VARS = ['sex', 'cabin', 'embarked', 'title']
+
+NUMERICAL_VARS = ['age', 'fare']
+
+CABIN = 'cabin'
