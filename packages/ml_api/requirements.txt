@@ -1,0 +1,6 @@
+# api
+flask==1.0.2
+
+# local classifier_model package
+# update with your local path
+-e "/Users/metra4ok/Documents/Udemy_course/my_projects/dmlm-titanic-classifier/packages/titanic_classifier_model"
