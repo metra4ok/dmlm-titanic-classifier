@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from titanic_classifier_model.predict import make_prediction
+from titanic_classifier_model import __version__ as model_version
 
+from api import __version__ as api_version
 from api.config import get_logger
 
 
@@ -14,6 +16,13 @@ def health():
     if request.method == 'GET':
         _logger.info('health status ok')
         return 'ok'
+
+
+@prediction_app.route('/version', methods=['GET'])
+def version():
+    if request.method == 'GET':
+        return jsonify({'model_version': model_version,
+                        'api_version': api_version})
 
 
 @prediction_app.route('/v1/predict/classification', methods=['POST'])
