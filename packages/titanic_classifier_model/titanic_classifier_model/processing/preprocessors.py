@@ -81,10 +81,16 @@ class ExtractFirstLetter(BaseEstimator, TransformerMixin):
         # we need this step to fit the sklearn pipeline
         return self
 
+    def _extract_letter(self, row):
+        try:
+            return row.str()[0]
+        except:
+            return np.nan
+
     def transform(self, X):
         X = X.copy()
         for var in self.variables:
-            X[var] = X[var].str[0]
+            X[var] = X[var].apply(self._extract_letter)
         return X
 
 

@@ -6,21 +6,14 @@ import joblib
 
 from titanic_classifier_model import pipeline
 from titanic_classifier_model.config import config
-
-
-def save_pipeline(*, pipeline_to_persist):
-    save_file_name = "classification_model.pkl"
-    save_path = config.TRAINED_MODEL_DIR / save_file_name
-    joblib.dump(pipeline_to_persist, save_path)
-
-    print("pipeline saved")
+from titanic_classifier_model.processing.data_management import load_data, save_pipeline
 
 
 def run_training():
     """Train the model."""
 
     # read training data
-    data = pd.read_csv(config.DATASET_DIR / config.TRAINING_DATA_FILE)
+    data = load_data(filename=config.TRAINING_DATA_FILE)
 
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(
