@@ -19,7 +19,7 @@ def make_prediction(*, input_data) -> dict:
     data = pd.read_json(input_data)
     validated_data = validate_inputs(data)
     prediction = _titanic_pipe.predict(validated_data[config.FEATURES])
-    response = {'predictions': prediction}
+    response = {'predictions': prediction, 'version': _version}
 
     _logger.info(
         f"Making predictions with model version: {_version} "
